@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+
+<head class="pro">
+    <meta charset="utf-8">
+    <title>学生选课系统scmis</title>
+    <link href="./static/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="./static/css/bootstrap/styles.css" rel="stylesheet">
+    <link href="./static/css/nprogress/nprogress.css" rel="stylesheet">
+    <link href="./static/css/newstyle.css" rel="stylesheet">
+    <style>
+        tr th{text-align:center;}
+    </style>
+
+</head>
+
+<body>
+
+    <!-- 引入导航栏 -->
+    <div class="pubhead"></div>
+
+    <!-- 用户信息列表 -->
+    <div class="panel container panel-body">
+        <h4>用户列表</h4>
+        <hr/>
+        <!-- 表头 -->
+        <div style="margin-bottom: 11.5px;">
+            <label for="userName">用户名：</label>
+            <input type="text" id="userName" style="width: 115px">
+            &nbsp;&nbsp;
+            <label for="Name">姓名：</label>
+            <input type="text" id="Name" style="width: 115px">
+            &nbsp;&nbsp;
+            <button class="btn btn-primary btn-sm" id="btn-Query">查询</button>
+            &nbsp;&nbsp;
+            <button class="btn btn-info btn-sm" id="btn-upload">批量上传</button>
+        </div>
+
+        <!-- 表格内容 -->
+        <table id="table" class="table table-bordered">
+            <thead >
+                <tr>
+                    <th style="width: 11%">用户名</th>
+                    <th style="width: 11%">姓名</th>
+                    <th style="width: 11.5%">学院</th>
+                    <th style="width: 11.5%">专业</th>
+                    <th style="width: 8%">班级</th>
+                    <th style="width: 9%">角色</th>
+                    <th style="width: 22%">操作</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- 批量导入表格 -->
+    <div class="modal fade" id="submitfileModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4>上传文件</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body" id="uploadPanel">
+                        导入用户 Excel 表：
+                        <input type="file" id="userfile" style="display: unset;">
+                        <a href="./static/adduserscmis.xlsx" download="example">(下载Excel模板)</a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="submitfile">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 修改信息、权限表格 -->
+    <div class="modal fade" id="edituserInfoModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <!-- 表头 -->
+                <div class="modal-header">
+                    <h4>用户信息更改</h4>
+                </div>
+                <!-- 内容 -->
+                <div class="modal-body">
+                    <div class="panel-body" id="editPanel">
+                        <div class="row">
+                            <label for="input-edituser-username">用户名</label>
+                            <input class="form-control" type="text" id="input-edituser-username" disabled>
+                        </div>
+                        <div class="row">
+                            <label for="input-edituser-name">姓名</label>
+                            <input class="form-control" type="text" id="input-edituser-name">
+                        </div>
+                        <div class="row">
+                            <label for="input-edituser-class">重置密码</label>
+                            <input class="form-control" type="text" id="input-edituser-newpassword">
+                        </div>
+
+                        <div class="row">
+                            <label for="input-edituser-class">班级</label>
+                            <input class="form-control" type="text" id="input-edituser-class">
+                        </div>
+                        <div class="row">
+                            <label for="input-edituser-major">专业</label>
+                            <input class="form-control" type="text" id="input-edituser-major">
+                        </div>
+                        <div class="row">
+                            <label for="input-edituser-department">学院</label>
+                            <input class="form-control" type="text" id="input-edituser-department">
+                        </div>
+                        <div class="row">
+                            <label for="input-edituser-role">用户角色</label>
+                            <select class="form-control" id="input-edituser-role">
+                                <option value="0">管理员</option>
+                                <option value="1">教师</option>
+                                <option value="2">学生</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <!-- 确认按钮 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button type="button" class="btn btn-primary" id="btn-edituserConfirm">确认修改</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 引入js文件 -->
+    <script src="./static/js/jquery/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="./static/js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+    <script src="./static/js/nprogress/nprogress.js" type="text/javascript"></script>
+    <script src="./static/js/datatables/datatables.min.js"></script>
+    <script src="./static/js/scmis/common.js" type="text/javascript"></script>
+    <script src="./static/js/scmis/user.js" type="text/javascript"></script>
+    <script src='./static/js/sheetjs/xlsx.full.min.js' type="text/javascript"></script>
+
+</body>
+
+</html>
