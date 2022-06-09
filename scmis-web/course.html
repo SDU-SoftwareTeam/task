@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head class="pro">
+    <meta charset="utf-8">
+    <title>学生选课系统scmis</title>
+
+    <link href="./static/css/bootstrap/bootstrap.min.css" rel="stylesheet">
+    <link href="./static/css/bootstrap/styles.css" rel="stylesheet">
+    <link href="./static/css/nprogress/nprogress.css" rel="stylesheet">
+    <link href="./static/css/newstyle.css" rel="stylesheet">
+    <style>
+        tr th{text-align:center;}
+    </style>
+</head>
+
+<body>
+    <div class="pubhead"></div>
+
+    <div class="modal fade uploadgrade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">学生成绩</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="div-fileuploader">
+                        上传 Excel 文件进行成绩录入：<input type="file" id="gradefile" style="display: unset"><br>
+                        <h3>(点击下方表格中【导出Excel】导出模板)</h3>
+                    </div>
+                    <table class="table table-hover" id="stutable2">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center;">学号</th>
+                                <th style="text-align: center;">姓名</th>
+                                <th style="text-align: center;">成绩</th>
+                                <th style="text-align: center;">学院</th>
+                                <th style="text-align: center;">专业</th>
+                            </tr>
+
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btn-gradeadd">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="panel container" id="admintable">
+        <div class="panel-body">
+            <h4>课程管理</h4>
+            <hr />
+            <div>
+                <label for="courseName">课程名称：</label>
+                <input type="text" id="courseName" style="width: 105px">
+                <label for="courseId">课程编号：</label>
+                <input type="text" id="courseId" style="width: 105px">
+                <!-- <span>     </span> -->
+                <label for="teacherName">教师姓名：</label>
+                <input type="text" id="teacherName" style="width: 105px">
+                <button class="btn btn-primary btn-sm" id="btn-Query">查询课程信息</button>
+                <!-- <button class="btn btn-primary btn-sm" id="btn-Add">添加课程设置信息</button> -->
+                <!-- 提供样例表 -->
+                <!-- <button class="btn btn-primary btn-sm" id="btn-Upload">批量添加</button> -->
+                <!-- Large modal -->
+                <button type="button" class="btn btn-info btn-sm" data-toggle="modal"
+                    data-target=".bs-example-modal-lg">批量添加课程
+                </button>
+            </div>
+
+            <div>
+                <!-- Table -->
+                <br />
+                <table class="table table-bordered" id="table">
+                    <thead>
+                        <tr>
+                            <th style="width: 7%">编号</th>
+                            <th style="width: 12%">课程名称</th>
+                            <th style="width: 13%">教师姓名</th>
+                            <th style="width: 13%">上课时段</th>
+                            <th style="width: 11%">教室位置</th>
+                            <th style="width: 10%">选课截止时间</th>
+                            <th style="width: 15%">课程说明</th>
+                            <th style="width: 2%">课余量</th>
+                            <th style="width: 2%">课容量</th>
+                            <th style="width: 15%">操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">上传文件</h4>
+                </div>
+                <div class="modal-body">
+                    文件： <input type="file" id="file" style="display: unset">
+                    <a href='./static/uploadmodelscmis.xlsx' download>(下载Excel模板)</a>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="btn-Add2">提交</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document" style="vertical-align: middle">
+            <div class="alert alert-primary" id="modalAlertType" role="alert">
+                <span id="modalAlert">None</span>
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="editcourseInfoModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="modalTitle">课程设置信息 </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                        <div class="row">
+                            <label for="input-editcourse-id">编号</label>
+                            <input class="form-control" type="text" id="input-editcourse-id"  disabled>
+                        </div>
+                        <div class="row">
+                            <label for="input-editcourse-course_name">课程名称</label>
+                            <input class="form-control" type="text" id="input-editcourse-course_name">
+                        </div>
+                        <div class="row">
+                            <label for="input-editcourse-max_capacity">课容量</label>
+                            <input class="form-control" type="text" id="input-editcourse-max_capacity">
+                        </div>
+                        <div class="row">
+                            <label for="input-editcourse-teacher_username">教师姓名</label>
+                            <input class="form-control" type="text" id="input-editcourse-teacher_username" >
+                        </div>
+                        <div class="row">
+                            <label for="input-editcourse-period">上课时段 </label>
+                            <input class="form-control" id="input-editcourse-period" type="text">
+                        </div>
+                        <div class="row">
+                            <label for="input-editcourse-classroom">教室位置</label>
+                            <input class="form-control" id="input-editcourse-classroom" type="text">
+                        </div>
+                        <div class="row">
+                            <label for="input-editcourse-end_time">截至选课时间</label>
+                            <form>
+                                <input class="form-control" id="input-editcourse-end_time" type="datetime-local"/>
+                            </form>
+                        </div>
+                        <div class="row">
+                            <label for="input-editcourse-description">课程说明</label>
+                            <textarea class="form-control" id="input-editcourse-description"></textarea>
+                        </div>
+                        <br />
+                        <div class="modal-footer">
+                            <div class="alert alert-danger" role="alert" id="edit-alert" style="display: none"></div>
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-primary" id="btn-editcourseConfirm">确认修改</button>
+                            <button type="button" class="btn btn-primary" id="btn-addcourseConfirm">确认添加</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="./static/js/jquery/jquery-1.12.4.min.js" type="text/javascript"></script>
+    <script src="./static/js/bootstrap/bootstrap.min.js" type="text/javascript"></script>
+    <script src="./static/js/nprogress/nprogress.js" type="text/javascript"></script>
+    <script src="./static/js/datatables/datatables.min.js"></script>
+    <script src="./static/js/scmis/common.js" type="text/javascript"></script>
+    <script src="./static/js/scmis/course.js" type="text/javascript"></script>
+    <script src='./static/js/sheetjs/xlsx.full.min.js' type="text/javascript"></script>
+</body>
+
+</html>
