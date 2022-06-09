@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-# !/usr/bin/env python
-# Copyright 2018 ZhangT. All Rights Reserved.
-# Author: ZhangT
-# Author-Github: github.com/zhangt2333
-# course_handler.py 2018/12/3 21:21
+
 import pymysql
 
 from utils.commons import required_login, required_principal, required_admin

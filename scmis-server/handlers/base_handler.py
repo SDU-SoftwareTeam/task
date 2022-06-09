@@ -1,9 +1,4 @@
-# -*- coding: utf-8 -*-
-# !/usr/bin/env python
-# Copyright 2018 ZhangT. All Rights Reserved.
-# Author: ZhangT
-# Author-Github: github.com/zhangt2333
-# base_handler.py 2018/12/3 21:20
+
 
 import json
 
